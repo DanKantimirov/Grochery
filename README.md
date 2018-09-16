@@ -1,5 +1,9 @@
 # Grochery
 
+**База данных**  
+Скрипт по накату БД: "CreateDatabaseScript.sql"  
+Не забываем изменить настройки коннекта к БД в ws-product в файле application.properties  
+
 **Сборка**  
 Каталог в которм находится этот файл, будем называть GR_HOME  
 cd GR_HOME  
@@ -34,6 +38,6 @@ java -jar ws-product-0.0.1-SNAPSHOT.jar
 java -jar GR_HOME/ws-product/target/ws-product-0.0.1-SNAPSHOT.jar  
 
 **Тест работы ws-product**  
-
-http://localhost:9020/ws-product/getProductHello		(обращаемся на порт с zuul)  
+http://localhost:9030/ws-product/product/getAllProducts/      (прямое обращение)  
+http://localhost:9020/api/ws-product/product/getAllProducts/	   (обращение через zuul, после поднятия контура требуется некоторое время для регистрации)  
 
