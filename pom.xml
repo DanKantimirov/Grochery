@@ -12,6 +12,7 @@
         <module>ws-eureka</module>
 		<module>ws-zuul</module>
 		<module>ws-product</module>
+		<module>ws-staff</module>
     </modules>
 
 </project>
