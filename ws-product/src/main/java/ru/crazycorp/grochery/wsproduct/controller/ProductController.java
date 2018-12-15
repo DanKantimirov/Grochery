@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.crazycorp.grochery.wsproduct.entity.database.Product;
 import ru.crazycorp.grochery.wsproduct.exception.ResourceNotFoundException;
 import ru.crazycorp.grochery.wsproduct.repository.ProductRepository;
+import ru.crazycorp.grochery.wsproduct.service.ProductService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     /**
      * http://localhost:9030/ws-product/product/
@@ -31,7 +32,7 @@ public class ProductController {
      * */
     @RequestMapping(value = "/getAllProducts", method = RequestMethod.GET)
     public List<Product> getAllProducts(Model model){
-        return productRepository.findAll();
+        return productService.getAllProducts();
     }
 
     /**
@@ -39,11 +40,7 @@ public class ProductController {
      * */
     @RequestMapping(value = "/getProductById", method = RequestMethod.GET)
     public Product getProductById(Model model, @RequestParam("productId") Integer producId){
-        Optional<Product> productOptional =  productRepository.findById(producId);
-        if(productOptional.isPresent()){
-            return productOptional.get();
-        }
-        throw new ResourceNotFoundException("Can't find product. ProductId:" + producId);
+        return productService.getProductById(producId);
     }
 
     /**
@@ -53,6 +50,6 @@ public class ProductController {
      * */
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
     public Product addProduct(@Valid @RequestBody Product product) {
-        return productRepository.save(product);
+        return productService.addProduct(product);
     }
 }

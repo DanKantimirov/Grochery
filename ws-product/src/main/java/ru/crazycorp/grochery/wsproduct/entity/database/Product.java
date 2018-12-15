@@ -18,6 +18,7 @@ public class Product {
     @Column(name = "product_name")
     private String ProductName;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
